@@ -1,7 +1,7 @@
 # install dockers
 
-sudo apt update
-sudo apt install -y ca-certificates curl gnupg lsb-release
+'''sudo apt update
+sudo apt install -y ca-certificates curl gnupg lsb-release'''
 
 # Add Docker’s official GPG key
 sudo mkdir -p /etc/apt/keyrings
