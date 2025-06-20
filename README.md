@@ -38,27 +38,43 @@ Open PowerShell as Admin:
 ```powershell
 wsl --install
 ```
+Restart your PC.
+
+2. Download Docker Desktop
+Go to: [LINK](https://www.docker.com/products/docker-desktop/)
+
+Click Download for Windows and install it.
+
+## 3. Enable WSL2 Integration
+After installation:
+
+Open Docker Desktop
+
+Go to Settings > General
+
+Ensure "Use WSL 2 instead of Hyper-V" is checked
+
+Go to Settings > Resources > WSL Integration and enable for your distro (e.g., Ubuntu)
 
 
+## 4. (Optional) Enable GPU Support
+If you want to run GPU containers:
 
-## 🐳 2. Install Docker inside WSL (Ubuntu)
+✅ Make sure:
 
-```sudo apt update
-sudo apt install docker.io -y
-sudo usermod -aG docker $USER
-newgrp docker
+You have NVIDIA driver + CUDA installed
+
+You install NVIDIA Container Toolkit inside WSL2 Ubuntu
+
+In WSL2 Ubuntu terminal:
+```sudo apt update && sudo apt install -y nvidia-container-toolkit
+sudo systemctl restart docker
 ```
 
-# 3. Enable GPU for Docker (Optional: RTX 4060)
-Install NVIDIA Toolkit:
-
-```distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | sudo apt-key add -
-curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
-
-sudo apt update
-sudo apt install -y nvidia-container-toolkit
-sudo service docker restart
+## 5. Test Docker
+In a terminal (Command Prompt, PowerShell, or Ubuntu):
+```docker --version
+docker run hello-world
 ```
 
 
