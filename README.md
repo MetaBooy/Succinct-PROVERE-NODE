@@ -38,7 +38,7 @@ Run a Succinct Prover Node on a **Windows PC** with **WSL2 + Ubuntu**, **Docker*
 
 Open PowerShell as Admin:
 
-powershell
+''powershell
 wsl --install
 
 ## 🚀 **1. Install WSL2 + Ubuntu**
