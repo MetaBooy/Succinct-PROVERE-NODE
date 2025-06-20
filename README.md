@@ -36,6 +36,16 @@ Run a Succinct Prover Node on a **Windows PC** with **WSL2 + Ubuntu**, **Docker*
 Open PowerShell as Admin:
 
 `''powershell
-wsl --install'''
+wsl --install
+
+
+
+### 🐳 2. Install Docker inside WSL (Ubuntu)
+
+'''sudo apt update
+sudo apt install docker.io -y
+sudo usermod -aG docker $USER
+newgrp docker
+
 
 
