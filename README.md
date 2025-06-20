@@ -52,11 +52,11 @@ newgrp docker
 # 3. Enable GPU for Docker (Optional: RTX 4060)
 Install NVIDIA Toolkit:
 
-distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+```distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | sudo apt-key add -
 curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
-```sudo apt update
+sudo apt update
 sudo apt install -y nvidia-container-toolkit
 sudo service docker restart
 ```
