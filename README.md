@@ -73,31 +73,28 @@ sudo service docker restart
 
 **This will output calibration results that look like the following:**
 
-Parameters:
-┌──────────────────┬────────┐
-│ Parameter        │ Value  │
-├──────────────────┼────────┤
-│ Cost Per Hour    │ $0.80  │
-├──────────────────┼────────┤
-│ Utilization Rate │ 50.00% │
-├──────────────────┼────────┤
-│ Profit Margin    │ 10.00% │
-├──────────────────┼────────┤
-│ Price of $PROVE  │ $1.00  │
-└──────────────────┴────────┘
+### Parameters
+
+| Parameter        | Value  |
+|------------------|--------|
+| Cost Per Hour    | $0.80  |
+| Utilization Rate | 50.00% |
+| Profit Margin    | 10.00% |
+| Price of $PROVE  | $1.00  |
+
+
 
 Starting calibration...
 
-Calibration Results:
-┌──────────────────────┬─────────────────────────┐
-│ Metric               │ Value                   │
-├──────────────────────┼─────────────────────────┤
-│ Estimated Throughput │ 1742469 PGUs/second     │
-├──────────────────────┼─────────────────────────┤
-│ Estimated Bid Price  │ 0.28 $PROVE per 1B PGUs │
-└──────────────────────┴─────────────────────────┘
+### Calibration Results
 
-This tells you that your prover can prove 1742469 prover gas units (PGUs) per second and that you should bid 0.28 $PROVE per 1B PGUs for proofs.
+| Metric               | Value                   |
+|----------------------|-------------------------|
+| Estimated Throughput | 1742469 PGUs/second     |
+| Estimated Bid Price  | 0.28 $PROVE per 1B PGUs |
+
+
+**This tells you that your prover can prove 1742469 prover gas units (PGUs) per second and that you should bid 0.28 $PROVE per 1B PGUs for proofs.**
 
 ## Set these parameters as environment variables for later use:
 
