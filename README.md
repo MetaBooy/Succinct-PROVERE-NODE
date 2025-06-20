@@ -20,3 +20,10 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 sudo systemctl enable docker
 sudo systemctl start docker
 ``bash sudo apt update sudo apt install -y ca-certificates curl gnupg lsb-release ``` 
+
+
+### install dockers
+
+```bash
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg lsb-release
