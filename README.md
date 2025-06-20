@@ -41,13 +41,14 @@ Open PowerShell as Admin:
 ```powershell
 wsl --install
 
-# 🐳 2. Install Docker inside WSL (Ubuntu)
+# **🐳 2. Install Docker inside WSL (Ubuntu)**
 '''sudo apt update
 sudo apt install docker.io -y
 sudo usermod -aG docker $USER
 newgrp docker
 
-# 3. Enable GPU for Docker (Optional: RTX 4060)
+
+# **3. Enable GPU for Docker (Optional: RTX 4060)**
 Install NVIDIA Toolkit:
 '''distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
 curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | sudo apt-key add -
@@ -57,7 +58,7 @@ sudo apt update
 sudo apt install -y nvidia-container-toolkit
 sudo service docker restart
 
-# 4. If you installed with Docker, you can run the following command:
+# **4. If you installed with Docker, you can run the following command:**
 '''docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu calibrate \
     --usd-cost-per-hour 0.80 \
     --utilization-rate 0.5 \
@@ -99,7 +100,7 @@ export PROVE_PER_BPGU=<PROVE_PER_BPGU>
 export PROVER_ADDRESS=<PROVER_ADDRESS>
 export PRIVATE_KEY=<PRIVATE_KEY>
 
-# Step 5: Run the Prover
+# **Step 5: Run the Prover**
 At this point, we've done all the necessary setup. If you installed with Docker, you can run the following command:
 
 '''docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu prove \
@@ -108,7 +109,7 @@ At this point, we've done all the necessary setup. If you installed with Docker,
     --bid $PROVE_PER_BPGU \
     --private-key $PRIVATE_KEY \
     --prover $PROVER_ADDRESS
-# example of this
+# **example of this**
 '''sudo docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu prove \
   --rpc-url https://rpc-production.succinct.xyz \
   --throughput 1742469 \
