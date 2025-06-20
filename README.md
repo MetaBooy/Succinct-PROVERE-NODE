@@ -1,5 +1,4 @@
-# Succinct
-3 install dockers
+# install dockers
 
 sudo apt update
 sudo apt install -y ca-certificates curl gnupg lsb-release
