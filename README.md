@@ -41,7 +41,7 @@ Open PowerShell as Admin:
 ```powershell
 wsl --install
 
-## 🐳 2. Install Docker inside WSL (Ubuntu)
+## 🚀 **1. Install WSL2 + Ubuntu**
 '''sudo apt update
 sudo apt install docker.io -y
 sudo usermod -aG docker $USER
