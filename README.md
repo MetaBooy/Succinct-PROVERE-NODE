@@ -135,8 +135,8 @@ At this point, we've done all the necessary setup. If you installed with Docker,
     --rpc-url https://rpc-production.succinct.xyz \
     --throughput 1742469 \
     --bid 0.28 \
-    --private-key ecb2bca32ceccddd250a8d350000000000000e0cbed7f9fe4d4a \
-    --prover 0x52CB34919E71Df2615045e7b58dD5cea9F720b20
+    --private-key YOUR  WALLET PRIVATEKEY \
+    --prover YOUR ADDRESS 
 ```
 
 
