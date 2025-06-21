@@ -35,7 +35,8 @@ Run a Succinct Prover Node on a **Windows PC** with **WSL2 + Ubuntu**, **Docker*
 
 Open PowerShell as Admin:
 
-```powershell
+```
+powershell
 wsl --install
 ```
 Restart your PC.
@@ -67,20 +68,23 @@ You have NVIDIA driver + CUDA installed
 You install NVIDIA Container Toolkit inside WSL2 Ubuntu
 
 In WSL2 Ubuntu terminal:
-```sudo apt update && sudo apt install -y nvidia-container-toolkit
+```
+sudo apt update && sudo apt install -y nvidia-container-toolkit
 sudo systemctl restart docker
 ```
 
 ## 5. Test Docker
 In a terminal (Command Prompt, PowerShell, or Ubuntu):
-```docker --version
+```
+docker --version
 docker run hello-world
 ```
 
 
 ## If you installed with Docker, you can run the following command:
 
-```docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu calibrate \
+```
+docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu calibrate \
     --usd-cost-per-hour 0.80 \
     --utilization-rate 0.5 \
     --profit-margin 0.1 \
@@ -114,7 +118,8 @@ Starting calibration...
 
 ## Set these parameters as environment variables for later use:
 
-```export PGUS_PER_SECOND=<PGUS_PER_SECOND>
+```
+export PGUS_PER_SECOND=<PGUS_PER_SECOND>
 export PROVE_PER_BPGU=<PROVE_PER_BPGU>
 export PROVER_ADDRESS=<PROVER_ADDRESS>
 export PRIVATE_KEY=<PRIVATE_KEY>
@@ -123,7 +128,8 @@ export PRIVATE_KEY=<PRIVATE_KEY>
 ## Step 5: Run the Prover
 At this point, we've done all the necessary setup. If you installed with Docker, you can run the following command:
 
-```docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu prove \
+```
+docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu prove \
     --rpc-url https://rpc-production.succinct.xyz \
     --throughput $PGUS_PER_SECOND \
     --bid $PROVE_PER_BPGU \
@@ -131,7 +137,8 @@ At this point, we've done all the necessary setup. If you installed with Docker,
     --prover $PROVER_ADDRESS
 ```
 **EXAMPLE**
-```docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu prove \
+```
+docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu prove \
     --rpc-url https://rpc-production.succinct.xyz \
     --throughput 1742469 \
     --bid 0.28 \
